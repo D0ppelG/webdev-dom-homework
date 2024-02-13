@@ -5,10 +5,9 @@
     <meta charset="utf-8" />
     <link rel="stylesheet" href="styles.css" />
   </head>
-
   <body>
     <div class="container">
-      <ul class="comments">
+      <ul class="comments" id="coms">
         <li class="comment">
           <div class="comment-header">
             <div>Глеб Фокин</div>
@@ -21,8 +20,8 @@
           </div>
           <div class="comment-footer">
             <div class="likes">
-              <span class="likes-counter">3</span>
-              <button class="like-button"></button>
+              <span class="likes-counter" id = "likesCounter">3</span>
+              <button class="like-button" id = "likeButton"></button>
             </div>
           </div>
         </li>
@@ -38,8 +37,8 @@
           </div>
           <div class="comment-footer">
             <div class="likes">
-              <span class="likes-counter">75</span>
-              <button class="like-button -active-like"></button>
+              <span class="likes-counter" id = "likesCounter">75</span>
+              <button class="like-button -active-like" id = "likeButton"></button>
             </div>
           </div>
         </li>
@@ -49,23 +48,70 @@
           type="text"
           class="add-form-name"
           placeholder="Введите ваше имя"
+          id="addFormName"
         />
         <textarea
           type="textarea"
           class="add-form-text"
           placeholder="Введите ваш коментарий"
+          id="addFormText"
           rows="4"
         ></textarea>
         <div class="add-form-row">
-          <button class="add-form-button">Написать</button>
+          <button class="add-form-button" id="addFormButton">Написать</button>
         </div>
       </div>
     </div>
   </body>
 
   <script>
-    "use strict";
-    // Код писать здесь
-    console.log("It works!");
+    const buttonElement = document.getElementById("addFormButton");
+    const inputNameElement = document.getElementById("addFormName");
+    const inputTextElement = document.getElementById("addFormText");
+    const inputUlElement = document.getElementById("coms");
+
+    let currentDate = new Date()
+    let day = currentDate.getDate();
+    let mounth = currentDate.getMonth();
+    let year = currentDate.getFullYear();
+    let hours = currentDate.getHours();
+    let minute = currentDate.getMinutes();
+
+    if (day < 10){
+      day = '0' + day;
+    }
+    if (mounth < 10) {
+      mounth = '0' + (mounth + 1);
+    }
+    if (hours < 10) {
+      hours = '0' + hours;
+    }
+    if (minute < 10) {
+      minute = '0' + minute;
+    }
+
+    const nowDate = day + '.' + mounth + '.' + (year - 2000) + ' ' + hours + ':' + minute;
+
+    buttonElement.addEventListener("click", () =>{
+      const oldListHtml = inputUlElement.innerHTML;
+      inputUlElement.innerHTML = oldListHtml + 
+      `<li class="comment">
+        <div class="comment-header">
+          <div>${inputNameElement.value}</div>
+          <div>${nowDate}</div>
+        </div>
+        <div class="comment-body">
+          <div class="comment-text">
+            ${inputTextElement.value}
+          </div>
+        </div>
+        <div class="comment-footer">
+          <div class="likes">
+            <span class="likes-counter" id = "likesCounter">0</span>
+            <button class="like-button" id = "likeButton"></button>
+          </div>
+        </div>
+      </li>`;
+    })
   </script>
 </html>
