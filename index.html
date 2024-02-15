@@ -94,6 +94,22 @@
 
     buttonElement.addEventListener("click", () =>{
       const oldListHtml = inputUlElement.innerHTML;
+      if (inputTextElement.value.trim() === "" && inputNameElement.value.trim() === "") {
+        inputTextElement.style.border = 'dashed red 3px';
+        inputTextElement.style.transition = 'all 1s'
+        inputNameElement.style.border = 'dashed red 3px';
+        inputNameElement.style.transition = 'all 1s'
+        return;
+      }else if (inputNameElement.value.trim() === ""){
+        inputNameElement.style.border = 'dashed red 3px';
+        inputNameElement.style.transition = 'all 1s'
+        return;
+      } else if(inputTextElement.value.trim() === ""){
+        inputTextElement.style.border = 'dashed red 3px';
+        inputTextElement.style.transition = 'all 1s'
+        return;
+      }
+
       inputUlElement.innerHTML = oldListHtml + 
       `<li class="comment">
         <div class="comment-header">
